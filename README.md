@@ -5,7 +5,9 @@ EMap demo
 
 外层build.gradle添加maven库：
 
+
  maven {
+ 
  		url  "https://dl.bintray.com/passerby-xa/EMap"
 		
        }
