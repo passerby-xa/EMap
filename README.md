@@ -25,7 +25,7 @@ EMap demo
 
 compile 'com.gis.lib:lib:1.0.2'
 
-2，demo中MainActivity中增加了MyMapOnTouchListener内部类，一些点击操作，比如获取经纬度和点中了哪个点等常用操作，看onSingleTap方法中的示例代码
+2，demo中MainActivity中增加了MyMapOnTouchListener内部类，一些点击操作，比如获取地图上任意一点的经纬度、点中了轨迹线中哪个点等常用操作，看onSingleTap方法中的示例代码
 
 3，地图事件的变更，具体看MainActivity即可
 
