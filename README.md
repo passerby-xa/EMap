@@ -45,4 +45,21 @@ compile 'com.gis.lib:lib:1.0.2'
 
 以上更新在demo的MainActivity中都有示例。
 
+-------------------------4.18更新--------------------------------
+1，compile 'com.gis.lib:lib:1.0.6'
+
+2，点返回唯一值，指定点删除。
+int m=tool_point.addPoint(122.123321,30.1523); 
+tool_point.clear_point(m); //删除某一点
+
+3，轨迹线，点分开了。要点就点，点线都要就都调用
+int i=tool_line.addLine(122.123321,30.1523);
+
+4，删除扇面圆，删除其他
+emap.clearSector();//删除扇面和圆
+emap.clear();//删除其它
+
+5，画圆覆盖物
+emap.addCircle(center, 1000,mFillSymbol2); //原点,半径（米）,样式
+
 

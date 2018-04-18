@@ -34,9 +34,10 @@ public class MainActivity extends Activity implements DrawEventListener {
     private DrawTool drawTool;
     public MyMapOnTouchListener mapDefaultOnTouchListener;//点击事件
 
-    TrackTool tool;
-    TrackTool tool2;
+    TrackTool tool_line;
+    TrackTool tool_point;
     List<Integer> list_line;
+    List<Integer> list_point;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,18 +71,23 @@ public class MainActivity extends Activity implements DrawEventListener {
         center.setX(120.10171884705784);
         center.setY(30.275667119589798);
         emap.addSector(center, 1000, 0,60,mFillSymbol); //原点,半径（米）,开始角度,结束角度，样式
+        // emap.clearSector();//删除扇面和圆
+        // emap.clear();//删除其它
 
+        //画圆
+        FillSymbol mFillSymbol2 =  new SimpleFillSymbol(Color.BLUE).setOutline(mLineSymbol).setAlpha(100);//面样式
+        emap.addCircle(center, 1000,mFillSymbol2); //原点,半径（米）,样式
 
         //两点间距离（米）
         double distance= emap.getDistance(119.2248,29.60848,119.2346,29.60893);
         Log.e("distance:",distance+"");
 
-       //轨迹线
+        //轨迹线-线
         SimpleMarkerSymbol mRedMarkerSymbol = new SimpleMarkerSymbol(Color.RED, 15, SimpleMarkerSymbol.STYLE.CIRCLE);
-        tool=new TrackTool(120.10123, 30.321, mRedMarkerSymbol, new SimpleLineSymbol(Color.BLACK, 5),true, mapView);
-        int i=tool.add(122.123321,30.1523);
-        int j=tool.add(124.123321,31.1523);
-        int k= tool.add(123.123321,32.1523);
+        tool_line=new TrackTool(120.10123, 30.321, mRedMarkerSymbol, new SimpleLineSymbol(Color.BLACK, 5),true, mapView);
+        int i=tool_line.addLine(122.123321,30.1523);
+        int j=tool_line.addLine(124.123321,31.1523);
+        int k= tool_line.addLine(123.123321,32.1523);
         //  List<RouteInfo> list=tool.end();//结束
         list_line=new ArrayList();
         list_line.add(i);
@@ -89,21 +95,19 @@ public class MainActivity extends Activity implements DrawEventListener {
         list_line.add(k);
 
 
+        //轨迹线-点
+        tool_point=new TrackTool(120.10123, 30.321, mRedMarkerSymbol, new SimpleLineSymbol(Color.BLACK, 5),true, mapView);
+        int m=tool_point.addPoint(122.123321,30.1523);
+        int n=tool_point.addPoint(124.123321,31.1523);
+        int q= tool_point.addPoint(123.123321,32.1523);
+        list_point=new ArrayList();
+        list_point.add(m);
+        list_point.add(n);
+        list_point.add(q);
 
-        tool2=new TrackTool(119.10123, 29.321, mRedMarkerSymbol, new SimpleLineSymbol(Color.BLUE, 5),true, mapView);
-        tool2.add(120.123321,30.1523);
-        tool2.add(122.123321,32.1523);
-        tool2.add(121.123321,32.1523);
-        // List<RouteInfo> list2= tool2.end();
+        tool_point.clear_point(m); //删除某一点
+        tool_point.clear_point(n);
 
-        graphicsLayer = new GraphicsLayer();
-        emap.addLayer(graphicsLayer);
-
-
-        // 初始化DrawTool实例
-        this.drawTool = new DrawTool(emap.getMap());
-        // 将本Activity设置为DrawTool实例的Listener
-        this.drawTool.addEventListener(this);
 
         //设置地图事件
         mapDefaultOnTouchListener = new MyMapOnTouchListener(emap.getMap().getContext(), emap.getMap());
@@ -154,13 +158,14 @@ public class MainActivity extends Activity implements DrawEventListener {
             emap.addPoint(point.getX(), point.getY(), new SimpleMarkerSymbol(Color.RED, 20, SimpleMarkerSymbol.STYLE.CIRCLE));
             Log.e("点击", point.getX() + "," + point.getY()); //点击的经纬度
 
-            int idx = tool.getSelectedIndex(e.getX(), e.getY());  //点中了轨迹线中的第几个点，返回-1则表示一个也没有点中
-            int idx2 = tool2.getSelectedIndex(e.getX(), e.getY());
-
-              if (idx != -1) {
-                Log.e("点击了tool的第", idx + "个点！");
-                Toast.makeText(mapView.getContext(), "点击了tool的第"+idx + "个点！", Toast.LENGTH_SHORT).show();
-
+            int idx = tool_point.getSelectedIndex(e.getX(), e.getY());  //点中了轨迹线中的第几个点，返回-1则表示一个也没有点中
+            if (idx != 0) {
+                for (int i=0;i<list_point.size();i++){
+                    if ( idx==list_point.get(i)){
+                        Log.e("点击了tool_point的第", i + "个点！");
+                        Toast.makeText(mapView.getContext(), "点击了tool_point的第"+i + "个点！", Toast.LENGTH_SHORT).show();
+                    }
+                }
                 /*
                 *******
                 点中以后的一些操作，比如页面跳转等
@@ -168,17 +173,11 @@ public class MainActivity extends Activity implements DrawEventListener {
                 */
             }else{
                 //线段点击
-                int j= tool.getSelectedIndexLine(e.getX(), e.getY());
+                int j= tool_line.getSelectedIndexLine(e.getX(), e.getY());
                 for (int i=0;i<list_line.size();i++){
                     if ( j==list_line.get(i)){
-                        Toast.makeText(mapView.getContext(), "点击了tool的第"+i + "段线！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mapView.getContext(), "点击了tool_line的第"+i + "段线！", Toast.LENGTH_SHORT).show();
                     }
-                }
-                if (idx2 != -1) {
-                    Log.e("点击了tool2的第", idx2 + "个点！");
-                    Toast.makeText(mapView.getContext(), "点击了tool2的第"+idx2 + "个点！", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(mapView.getContext(), "点击了："+point.getX() + "," + point.getY(), Toast.LENGTH_SHORT).show();
                 }
             }
             return super.onSingleTap(e);
