@@ -63,4 +63,19 @@ emap.clear();//删除其它
 5，画圆覆盖物
 emap.addCircle(center, 1000,mFillSymbol2); //原点,半径（米）,样式
 
+-------------------------4.26更新--------------------------------
+
+1，compile 'com.gis.lib:lib:1.0.7'
+
+2, 删除圆 clearCircle()，删除扇形 clearSector()  
+
+3, 删除指定点 emap.clear(int id);
+
+4，轨迹线-线
+tool_line=new TrackTool(120.10123, 30.321, Symbol, mapView);   
+ 
+轨迹线-点
+tool_point=new TrackTool(Symbol,  mapView);
+
+5, 显示顺序，点线最上面，圆中间，扇面最下面
 

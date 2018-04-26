@@ -55,7 +55,8 @@ public class MainActivity extends Activity implements DrawEventListener {
         //设置地图等级
         emap.setLevel(4);
         //画点
-        emap.addPoint(120.09739062959324,30.266542846034017,new SimpleMarkerSymbol(Color.RED, 20, SimpleMarkerSymbol.STYLE.CIRCLE));
+       int id= emap.addPoint(120.09739062959324,30.266542846034017,new SimpleMarkerSymbol(Color.RED, 20, SimpleMarkerSymbol.STYLE.CIRCLE));
+
 
         //画线
         List<Double[]> myList=new ArrayList<Double[]>();
@@ -71,8 +72,10 @@ public class MainActivity extends Activity implements DrawEventListener {
         center.setX(120.10171884705784);
         center.setY(30.275667119589798);
         emap.addSector(center, 1000, 0,60,mFillSymbol); //原点,半径（米）,开始角度,结束角度，样式
-        // emap.clearSector();//删除扇面和圆
+        // emap.clearSector();//删除扇面
+        //emap.clearCircle();//删除圆
         // emap.clear();//删除其它
+        //emap.clear(id);删点
 
         //画圆
         FillSymbol mFillSymbol2 =  new SimpleFillSymbol(Color.BLUE).setOutline(mLineSymbol).setAlpha(100);//面样式
@@ -83,30 +86,32 @@ public class MainActivity extends Activity implements DrawEventListener {
         Log.e("distance:",distance+"");
 
         //轨迹线-线
-        SimpleMarkerSymbol mRedMarkerSymbol = new SimpleMarkerSymbol(Color.RED, 15, SimpleMarkerSymbol.STYLE.CIRCLE);
-        tool_line=new TrackTool(120.10123, 30.321, mRedMarkerSymbol, new SimpleLineSymbol(Color.BLACK, 5),true, mapView);
+        tool_line=new TrackTool(120.10123, 30.321, new SimpleLineSymbol(Color.BLACK, 5), mapView);
         int i=tool_line.addLine(122.123321,30.1523);
         int j=tool_line.addLine(124.123321,31.1523);
         int k= tool_line.addLine(123.123321,32.1523);
-        //  List<RouteInfo> list=tool.end();//结束
         list_line=new ArrayList();
         list_line.add(i);
         list_line.add(j);
         list_line.add(k);
-
+       // tool_line.clear_line(j);//删除线
+       // tool_line.clear_line(k);
 
         //轨迹线-点
-        tool_point=new TrackTool(120.10123, 30.321, mRedMarkerSymbol, new SimpleLineSymbol(Color.BLACK, 5),true, mapView);
+        SimpleMarkerSymbol mRedMarkerSymbol = new SimpleMarkerSymbol(Color.RED, 15, SimpleMarkerSymbol.STYLE.CIRCLE);
+        tool_point=new TrackTool(mRedMarkerSymbol,  mapView);
+        int x=tool_point.addPoint(120.10123, 30.321);
         int m=tool_point.addPoint(122.123321,30.1523);
         int n=tool_point.addPoint(124.123321,31.1523);
         int q= tool_point.addPoint(123.123321,32.1523);
         list_point=new ArrayList();
+        list_point.add(x);
         list_point.add(m);
         list_point.add(n);
         list_point.add(q);
 
-        tool_point.clear_point(m); //删除某一点
-        tool_point.clear_point(n);
+      //  tool_point.clear_point(m); //删除某一点
+     //   tool_point.clear_point(n);
 
 
         //设置地图事件
