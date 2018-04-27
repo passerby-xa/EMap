@@ -33,7 +33,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile 'com.esri.arcgis.android:arcgis-android:10.2.9'
-    compile 'com.gis.lib:lib:1.0.7'
+    compile 'com.gis.lib:lib:1.0.8'
    // compile files('libs/map_V1.1.jar')
 }
 
