@@ -52,8 +52,8 @@ public class MainActivity extends Activity implements DrawEventListener {
         this.mapView = (MapView) this.findViewById(R.id.map);
         emap = new EMap(mapView);
 
-        emap.showWorldSatelliteLayer();//天地图影像
-        // emap.showWorldVectorLayer();//天地图矢量
+        emap.showWorldSatelliteLayer();//天地图矢量
+        // emap.showWorldVectorLayer();//天地图影像
 
         //居中位置
         emap.setCenter(120.09739062959324, 30.266542846034017);
@@ -90,12 +90,14 @@ public class MainActivity extends Activity implements DrawEventListener {
         double distance = emap.getDistance(119.2248, 29.60848, 119.2346, 29.60893);
         Log.e("distance:", distance + "");
 
+
         //轨迹线-线
-        tool_line = new TrackTool(120.10123, 30.321, new SimpleLineSymbol(Color.BLACK, 5), mapView);
-        int i = tool_line.addLine(122.123321, 30.1523);
-        int j = tool_line.addLine(124.123321, 31.1523);
-        int k = tool_line.addLine(123.123321, 32.1523);
-        list_line = new ArrayList();
+        tool_line=new TrackTool( new SimpleLineSymbol(Color.BLACK, 5), mapView,"");
+        int i=tool_line.addLine(120.10123, 30.321,122.123321,30.1523);
+        int j=tool_line.addLine(122.123321,30.1523,124.123321,31.1523);
+        int k= tool_line.addLine(124.123321,31.1523,123.123321,32.1523);
+        //  List<RouteInfo> list=tool.end();//结束
+        list_line=new ArrayList();
         list_line.add(i);
         list_line.add(j);
         list_line.add(k);
@@ -116,6 +118,19 @@ public class MainActivity extends Activity implements DrawEventListener {
         list_point.add(q);
         //  tool_point.clear_point(m); //删除某一点
         //   tool_point.clear_point(n);
+
+
+        //离线地图用
+        /*Map map= emap.getCitys(); //获取城市
+
+        new Thread(new Runnable() {
+            public void run() {
+                emap.downloadCity(0571);///////// 下载城市离线地图
+            }
+        }).start();
+
+        emap.getDownloadCurrent();//当前已下载量
+        emap.getDownloadCount(0571); //总量*/
 
 
         //设置地图事件

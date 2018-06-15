@@ -87,3 +87,18 @@ tool_point=new TrackTool(Symbol,  mapView);
 
 3, 增加了选点按钮示例，通过锁定地图，拖动准十字星来精准选点
 
+-------------------------6.15更新--------------------------------
+
+1，compile 'com.gis.lib:lib:1.0.9'
+
+2, 影像图修正  
+
+3, 轨迹线-线每次需传两个点
+tool_line.addLine(120.10123, 30.321,122.123321,30.1523);
+
+4，离线地图
+	增加获取城市接口：getCitys()；
+	下载城市离线地图接口：downloadCity(0571);
+	当前已下载量接口：getDownloadCurrent();
+    下载总量接口：getDownloadCount：getDownloadCount(0571);
+
