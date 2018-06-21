@@ -121,11 +121,16 @@ public class MainActivity extends Activity implements DrawEventListener {
 
 
         //离线地图用
-        /*Map map= emap.getCitys(); //获取城市
-
+       // Map map= emap.getCitys(); //获取城市
+        /*Map map= emap.getCity(120.10171884705784,30.275667119589798); //获取当前所在城市
         new Thread(new Runnable() {
             public void run() {
-                emap.downloadCity(0571);///////// 下载城市离线地图
+               String time=emap.downloadCity(0571);///////// 下载城市离线地图
+
+               //将城市编号和时间存在sp中，便于查询
+             SharedPreferences.Editor editor = getSharedPreferences("map", MODE_WORLD_WRITEABLE).edit();
+             editor.putString("0571", time);
+             editor.commit();
             }
         }).start();
 

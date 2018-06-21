@@ -101,4 +101,13 @@ tool_line.addLine(120.10123, 30.321,122.123321,30.1523);
 	下载城市离线地图接口：downloadCity(0571);
 	当前已下载量接口：getDownloadCurrent();
     下载总量接口：getDownloadCount：getDownloadCount(0571);
+	
+-------------------------6.21更新--------------------------------
+
+1，compile 'com.gis.lib:lib:1.0.10'
+
+2, Map map= emap.getCity(120.10171884705784,30.275667119589798); //获取当前所在城市
+
+3, String time=emap.downloadCity(0571); //返回下载时间
+
 
