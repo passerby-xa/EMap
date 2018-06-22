@@ -110,4 +110,23 @@ tool_line.addLine(120.10123, 30.321,122.123321,30.1523);
 
 3, String time=emap.downloadCity(0571); //返回下载时间
 
+-------------------------6.22更新--------------------------------
 
+1，compile 'com.gis.lib:lib:1.0.11'
+
+2, 返回时间采用回调函数
+  
+    emap.setCallBack(this);//注册监听
+
+	继承CallBack接口
+	
+	@Override
+    public void backTime(String time) {
+        //将城市编号和时间存在sp中，便于以后查询
+        SharedPreferences.Editor editor = getSharedPreferences("map", MODE_WORLD_WRITEABLE).edit();
+         editor.putString("0571", time);
+        editor.commit();
+    }
+
+3, 增加变更点样式方法
+    tool_point.updatePointSymbol(m,new SimpleMarkerSymbol(Color.BLUE, 15, SimpleMarkerSymbol.STYLE.CIRCLE));

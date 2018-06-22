@@ -24,12 +24,13 @@ import com.esri.core.symbol.SimpleMarkerSymbol;
 import com.gis.lib.Draw.DrawEvent;
 import com.gis.lib.Draw.DrawEventListener;
 import com.gis.lib.Draw.TrackTool;
+import com.gis.lib.map.CallBack;
 import com.gis.lib.map.EMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity implements DrawEventListener {
+public class MainActivity extends Activity implements DrawEventListener , CallBack {
 
     private Context context;
     private EMap emap = null;
@@ -118,20 +119,18 @@ public class MainActivity extends Activity implements DrawEventListener {
         list_point.add(q);
         //  tool_point.clear_point(m); //删除某一点
         //   tool_point.clear_point(n);
+        //变更点样式
+        tool_point.updatePointSymbol(m,new SimpleMarkerSymbol(Color.BLUE, 15, SimpleMarkerSymbol.STYLE.CIRCLE));
 
 
         //离线地图用
        // Map map= emap.getCitys(); //获取城市
         /*Map map= emap.getCity(120.10171884705784,30.275667119589798); //获取当前所在城市
+        emap.setCallBack(this);
         new Thread(new Runnable() {
             public void run() {
-               String time=emap.downloadCity(0571);///////// 下载城市离线地图
-
-               //将城市编号和时间存在sp中，便于查询
-             SharedPreferences.Editor editor = getSharedPreferences("map", MODE_WORLD_WRITEABLE).edit();
-             editor.putString("0571", time);
-             editor.commit();
-            }
+               emap.downloadCity(0571);///////// 下载城市离线地图
+          }
         }).start();
 
         emap.getDownloadCurrent();//当前已下载量
@@ -170,6 +169,13 @@ public class MainActivity extends Activity implements DrawEventListener {
         this.mapView.setOnTouchListener(mapDefaultOnTouchListener);
     }
 
+    @Override
+    public void backTime(String time) {
+        //将城市编号和时间存在sp中，便于以后查询
+      /*  SharedPreferences.Editor editor = getSharedPreferences("map", MODE_WORLD_WRITEABLE).edit();
+         editor.putString("0571", time);
+        editor.commit();*/
+    }
 
     class MyMapOnTouchListener extends MapOnTouchListener {
 
