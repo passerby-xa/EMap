@@ -130,3 +130,22 @@ tool_line.addLine(120.10123, 30.321,122.123321,30.1523);
 
 3, 增加变更点样式方法
     tool_point.updatePointSymbol(m,new SimpleMarkerSymbol(Color.BLUE, 15, SimpleMarkerSymbol.STYLE.CIRCLE));
+
+-------------------------6.28更新--------------------------------
+
+1，compile 'com.gis.lib:lib:1.0.12'
+
+2, 返回进度采用回调函数
+  
+    emap.setCallBack(this);//注册监听
+
+	继承CallBack接口
+	
+    @Override
+    public void count(int count){
+        //count进度值
+
+    }
+3，增加了EMap()的无参构造函数。 这样下载和地图可分开。	
+
+3, 取消了根据经纬度获取当前所在城市

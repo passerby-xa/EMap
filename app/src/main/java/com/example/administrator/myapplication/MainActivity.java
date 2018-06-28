@@ -122,10 +122,9 @@ public class MainActivity extends Activity implements DrawEventListener , CallBa
         //变更点样式
         tool_point.updatePointSymbol(m,new SimpleMarkerSymbol(Color.BLUE, 15, SimpleMarkerSymbol.STYLE.CIRCLE));
 
-
         //离线地图用
        // Map map= emap.getCitys(); //获取城市
-        /*Map map= emap.getCity(120.10171884705784,30.275667119589798); //获取当前所在城市
+        /*
         emap.setCallBack(this);
         new Thread(new Runnable() {
             public void run() {
@@ -177,6 +176,11 @@ public class MainActivity extends Activity implements DrawEventListener , CallBa
         editor.commit();*/
     }
 
+    @Override
+    public void count(int count){
+        //进度
+
+    }
     class MyMapOnTouchListener extends MapOnTouchListener {
 
         public MyMapOnTouchListener(Context context, MapView view) {
