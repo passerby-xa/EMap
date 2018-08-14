@@ -149,3 +149,33 @@ tool_line.addLine(120.10123, 30.321,122.123321,30.1523);
 3，增加了EMap()的无参构造函数。 这样下载和地图可分开。	
 
 3, 取消了根据经纬度获取当前所在城市
+
+-------------------------8.14更新--------------------------------
+
+1，compile 'com.gis.lib:lib:1.0.20'
+
+2, 回调函数中增加了城市编号
+  
+    @Override
+    public void backTime(String time,int citycode){
+        //将城市编号和时间存在sp中，便于以后查询
+        /* SharedPreferences.Editor editor = getSharedPreferences("map", MODE_WORLD_WRITEABLE).edit();
+         editor.putString("0571", time);
+        editor.commit();*/
+    }
+
+    public void count(int count,int citycode){
+      //进度
+        Log.e("tttt"+citycode,count+"");
+    }
+	
+3，下载离线地图 emap.downloadTiled(double xmin,double ymin,double xmax,double ymax,int citycode); //单线程下载
+     emap.downloadTiledThread(double xmin,double ymin,double xmax,double ymax,int citycode);   //多线程下载
+
+4,  取消了水印
+
+5， 离线地图下载包含注记层
+
+6， 单独增加了定位的图层和加点以及删除方法 emap.addPosition(); emap.clearPosition(); 
+
+7,  点位边上增加文字，emap.addPoint(120.10171884705784,30.275667119589798,new TextSymbol(20, " abc你好！", Color.RED).setFontFamily("DroidSansFallback.ttf"));

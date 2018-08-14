@@ -21,6 +21,7 @@ import com.esri.core.symbol.LineSymbol;
 import com.esri.core.symbol.SimpleFillSymbol;
 import com.esri.core.symbol.SimpleLineSymbol;
 import com.esri.core.symbol.SimpleMarkerSymbol;
+import com.esri.core.symbol.TextSymbol;
 import com.gis.lib.Draw.DrawEvent;
 import com.gis.lib.Draw.DrawEventListener;
 import com.gis.lib.Draw.TrackTool;
@@ -58,10 +59,19 @@ public class MainActivity extends Activity implements DrawEventListener , CallBa
 
         //居中位置
         emap.setCenter(120.09739062959324, 30.266542846034017);
+
+        //定位点
+        emap.addPosition(120.09739062959324,30.266542846034017,new SimpleMarkerSymbol(Color.BLUE, 20, SimpleMarkerSymbol.STYLE.CIRCLE));
+        //emap.clearPosition(); 删除定位点
+
+
         //设置地图等级
         emap.setLevel(4);
         //画点
-        int id = emap.addPoint(120.09739062959324, 30.266542846034017, new SimpleMarkerSymbol(Color.RED, 20, SimpleMarkerSymbol.STYLE.CIRCLE));
+        int id = emap.addPoint(120.05739062959324, 30.266542846034017, new SimpleMarkerSymbol(Color.RED, 20, SimpleMarkerSymbol.STYLE.CIRCLE));
+        //加文字
+        int id2 = emap.addPoint(120.05739062959324, 30.266542846034017,new TextSymbol(20, " abc你好！", Color.RED).setFontFamily("DroidSansFallback.ttf"));
+
         //int id2= emap.getSelectedIndex(120.09739062959324,30.266542846034017); 一定范围选中返回id
 
         //画线
