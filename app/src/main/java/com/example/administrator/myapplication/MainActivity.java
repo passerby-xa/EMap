@@ -40,6 +40,7 @@ public class MainActivity extends Activity implements DrawEventListener , CallBa
     public MyMapOnTouchListener mapDefaultOnTouchListener;//点击事件
     ImageView imgHeart; // 准心
     private int curOp = -1;
+    int mapType=1;
     TrackTool tool_line;
     TrackTool tool_point;
     List<Integer> list_line;
@@ -168,7 +169,26 @@ public class MainActivity extends Activity implements DrawEventListener , CallBa
                 }
             }
         });
+
+
+        //矢量影像切换
+        Button btnDrawMap = (Button) this.findViewById(R.id.btnDrawMap);
+        btnDrawMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mapType == 1) {
+                    mapType = 0;
+                    emap.showWorldVectorLayer();//天地图影像
+                }
+               else {
+                    mapType = 1;
+                    emap.showWorldSatelliteLayer();//天地图矢量
+                }
+            }
+        });
     }
+
+
 
     @Override
     public void handleDrawEvent(DrawEvent event) {

@@ -169,7 +169,7 @@ tool_line.addLine(120.10123, 30.321,122.123321,30.1523);
         Log.e("tttt"+citycode,count+"");
     }
 	
-3，下载离线地图 emap.downloadTiled(double xmin,double ymin,double xmax,double ymax,int citycode); //单线程下载
+3， 下载离线地图 emap.downloadTiled(double xmin,double ymin,double xmax,double ymax,int citycode); //单线程下载
      emap.downloadTiledThread(double xmin,double ymin,double xmax,double ymax,int citycode);   //多线程下载
 
 4,  取消了水印
@@ -179,3 +179,9 @@ tool_line.addLine(120.10123, 30.321,122.123321,30.1523);
 6， 单独增加了定位的图层和加点以及删除方法 emap.addPosition(); emap.clearPosition(); 
 
 7,  点位边上增加文字，emap.addPoint(120.10171884705784,30.275667119589798,new TextSymbol(20, " abc你好！", Color.RED).setFontFamily("DroidSansFallback.ttf"));
+
+-------------------------8.15更新--------------------------------
+
+1，compile 'com.gis.lib:lib:1.0.21'
+
+2, 增加了按钮，矢量地图和影像地图直接切换即可
